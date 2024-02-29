@@ -1,2 +1,2 @@
 # S47_Anuj_Sahu_Capstone_Fundmangement
-This is your first repository
+I am creating a website where i help people to mange their funds.
