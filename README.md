@@ -1,7 +1,7 @@
 # S47_Anuj_Sahu_Capstone_Fundmangement
 Brief Description
 
-## I have an interest in the finance sector so I have decided to build something around it. After doing some basic research I found an Idea. I am building a website that helps individuals to manage their money. This website suggests to them where they can invest for their target returns. 
+## I have an interest in the finance sector so I have decided to build something around it. After doing some basic research I found an Idea. I am building a website that helps individuals to manage their money. This website suggests to them where they can invest for the target returns. 
 
 
 ### Features:
