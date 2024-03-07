@@ -10,6 +10,11 @@ app.get('/', (req,res) => {
     })
 });
 
+
+app.get('/getApi',(req,res)=>{
+    res.json({message:'I have used the get API'})
+})
+
 app.listen(port , ()=>{
     console.log(`Server is started🚀🚀 at ${port}`)
 })
