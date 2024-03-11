@@ -14,4 +14,6 @@ Brief Description
 - 4. Real-time advice from the finance experts.
 
 
-[ Deployed link ] (https://fundma.netlify.app/)
+[ Deployed link ](https://fundma.netlify.app/)
+
+[Figma Link](https://www.figma.com/file/KW7AfLTm6ENHBKuH2nQme1/Untitled?type=design&node-id=0%3A1&mode=design&t=CKwJcIx804es9kBc-1) 
