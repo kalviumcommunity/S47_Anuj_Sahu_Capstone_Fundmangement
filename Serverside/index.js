@@ -16,7 +16,7 @@ app.get('/prac',anuj)
 app.get('/', homeRoute); // route for the home route.
 
 
-// app.post('/add_User', add_User); // Route for the SignUp
+app.post('/add_User', add_User); // Route for the SignUp
 
 const startServer = () => {
         app.listen(port, () => {
