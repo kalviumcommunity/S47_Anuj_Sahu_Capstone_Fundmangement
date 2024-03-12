@@ -29,9 +29,9 @@ exports.homeRoute = (req,res)=>{
 
 
 // Defining the route for the add_Users.
-// exports.add_User = async (req,res)=>{
-//     const newUser = await UserDataSignUp.create(req.body);
-//     res.send(newUser)
+exports.add_User = async (req,res)=>{
+    const newUser = await UserDataSignUp.create(req.body);
+    res.send(newUser)
 
-// }
+}
 
