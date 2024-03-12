@@ -1,18 +1,29 @@
 const express = require('express');
-const UserController = require('./Controller.js')
+const bodyParser = require('body-parser');
+const { startDatabase, homeRoute, add_User, anuj } = require('./Controller.js'); 
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.port
+const port = process.env.port;
 
-app.get('/',UserController.homeRoute) // route for the home route.
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors());
 
-app.post('/add_User', UserController.add_User)
+app.get('/prac',anuj)
+
+app.get('/', homeRoute); // route for the home route.
 
 
-app.listen(port , ()=>{
-    console.log(`Server is started🚀🚀 at ${port}`)
-})
+// app.post('/add_User', add_User); // Route for the SignUp
 
+const startServer = () => {
+        app.listen(port, () => {
+        console.log(`Server is running on port ${port} 🚀🚀`);
+    });
+};
+
+startDatabase().then(() => startServer());
 
 
