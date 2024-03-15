@@ -1,13 +1,11 @@
-.bannerImages{
-    width: 100%;
-    height: 55vh;
-}
+
+
 .whyChooseUs{
     text-align: center;
     margin-top: 8vh;
     margin-left: 33vw;
     background-color: #BBDBFA;
-    width: 35vw;
+    width: 30vw;
     
 }
 .whyChooseUs h1{
@@ -16,15 +14,15 @@
     color: #084C90;
 }
 
-
-
-
-
-/* Main.module.css */
-
 .bannerImages {
-    width: 100%;
+    width: 100vw;
     height: 55vh;
+    
+}
+
+.bigbanner img{
+   overflow: hidden;
+   width:1150px;
 }
 
 .whyChooseUs {
@@ -55,7 +53,7 @@
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #BBDBFA(0, 0, 0, 0.1);
 }
 
 .reason h2 {
@@ -94,7 +92,6 @@
     padding: 2vh;
 }
 
-/* Main.module.css */
 
 .servicesSection {
     display: flex;
@@ -115,7 +112,7 @@
     margin: 20px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #BBDBFA(0, 0, 0, 0.1);
     text-align: center;
     background-color: #ffffff;
 }
