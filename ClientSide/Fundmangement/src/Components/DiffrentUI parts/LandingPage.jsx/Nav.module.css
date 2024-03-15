@@ -4,32 +4,37 @@
     font-family: 'Jacques Francois', sans-serif;
 }
 
-nav {
-    height: 12vh;
+
+.upperNav {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 10vh;
     background-color: #084C90;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0.1vh;
 }
 
 .companyName {
     color: white;
     margin-left: 2vw;
-    padding-top: 2.5vh;
+    padding-top: 3vh;
     font-size: 2vw;
 }
 
 .login, .signup {
-    margin-right: 1.5vw;
+    margin-right: 3vw;
     margin-top: 2vh;
-    height: 7vh;
+    height: 6vh;
     width: 9vw;
-    font-size: 1.7vw;
+    font-size: 1.5vw;
     border-radius: 0.8vw;
     background-color: #007bff;
-    cursor: pointer;
+    border-color: #007bff; 
+    color: #ffffff;
     transition: background-color 0.3s ease;
 }
-
 .login {
     background-color: #007bff;
     color: #ffffff;
@@ -38,8 +43,25 @@ nav {
 .signup {
     background-color: #ffffff;
     color: #007bff;
+    margin-right: 1.5vw;
 }
 
 .login:hover, .signup:hover {
     background-color: #0056b3;
+}
+
+.lowerNav{
+    height: 6vh;
+    background-color: #BBDBFA;
+    display: flex;
+    
+}
+
+.lowerNav a{
+    text-decoration: none;
+    color: black;
+    margin-left: 2vw;
+    margin-top: 1vh;
+    font-weight: 550;
+    font-size: 1.4vw;
 }
