@@ -51,7 +51,7 @@ return (
                     <p>We prioritize timely delivery of our services, ensuring you meet your deadlines and objectives efficiently.</p>
                 </div>
             </div>
-            <div>
+            <div className={styles.bigbanner}>
                 <img src={bannerImages[1]} alt="" />
             </div>
         </section>

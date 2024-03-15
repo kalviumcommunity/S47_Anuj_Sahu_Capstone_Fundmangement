@@ -51,6 +51,7 @@
 }
 
 .lowerNav{
+    width: 100vw;
     height: 6vh;
     background-color: #BBDBFA;
     display: flex;
