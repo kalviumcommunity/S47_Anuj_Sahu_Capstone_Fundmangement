@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 
- function Profile() {
+function Profile() {
   return (
     <div>
       <h1>Welcome to the Anuj page</h1>
