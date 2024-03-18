@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Nav.module.css';
+import { Link } from 'react-router-dom';
 
 
 function Nav() {
@@ -11,8 +12,8 @@ return (
                 <h1 className={styles.companyName}>Morpheus Funds</h1>
             </div>
             <div>
-                <button type="button" className={styles.signup} >Sign Up</button>
-                <button type="button" className={styles.login} >Login</button>
+                <Link to ="/signup"><button type="button" className={styles.signup} >Sign Up</button></Link>
+                <Link to="/login"><button type="button" className={styles.login} >Login</button></Link>
             </div>
         </div>
         <div className={styles.lowerNav}>

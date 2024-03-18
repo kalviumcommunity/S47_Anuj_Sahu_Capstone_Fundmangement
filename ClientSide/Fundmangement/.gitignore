@@ -9,6 +9,7 @@ lerna-debug.log*
 
 
 dist
+dist/
 dist-ssr
 *.local
 
