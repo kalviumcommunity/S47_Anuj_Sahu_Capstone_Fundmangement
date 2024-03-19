@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { startDatabase, homeRoute, add_User, anuj } = require('./Controller.js'); 
+const { startDatabase, homeRoute, anuj, signup } = require('./Controller.js'); 
 const cors = require('cors');
 require('dotenv').config();
 
@@ -11,12 +11,12 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/prac',anuj)
+// app.get('/prac',anuj)
 
 app.get('/', homeRoute); // route for the home route.
 
 
-app.post('/add_User', add_User); // Route for the SignUp
+app.post('/signup', signup); // Route for the SignUp
 
 const startServer = () => {
         app.listen(port, () => {
