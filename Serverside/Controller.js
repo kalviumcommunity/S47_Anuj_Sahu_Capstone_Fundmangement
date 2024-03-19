@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const UserDataSignUp = require("./usermodel.js")
-const cors = require('cors');
+const signupSchema  = require('./Validators/SignupValidate.js')
+const crypto = require('crypto');
+
 
 
 exports.startDatabase = async () => {
@@ -12,12 +14,30 @@ exports.startDatabase = async () => {
     }
 };
 
-exports.anuj = (req,res) =>{
-    UserDataSignUp.find({})
-    .then((data) => res.json(data))
-    .catch((err) => res.status(500).json({ error: err }));
-}
+exports.signup = async(req,res) =>{
+    try{
+        const {value,error} = signupSchema.validate(req.body)
 
+        if(error){
+                res.send(error.message)
+            }
+            
+        const hashPassword = crypto.createHash('sha256').update(value.password).digest('base64')
+        const newUser = UserDataSignUp.create({
+            userName:value.userName,
+            email:value.email,
+            password:hashPassword
+        })
+        res.status(201).send('Account Created Successfully')
+    
+    
+    }
+    catch(error){
+        res.status(500).send("Internal Server Error");
+    }
+
+    }
+    
 
 
 // define the route or the Home Route.
@@ -28,10 +48,6 @@ exports.homeRoute = (req,res)=>{
 
 
 
-// Defining the route for the add_Users.
-exports.add_User = async (req,res)=>{
-    const newUser = await UserDataSignUp.create(req.body);
-    res.send(newUser)
 
-}
+
 
