@@ -1,5 +1,3 @@
-/* Main.module.css */
-
 .wholepage {
     display: flex;
     height: 100vh;
@@ -18,7 +16,6 @@
 
 .rightpanal {
     width: 50vw;
-    /* background-color: #BBDBFA; */
     color: #084C90;
     display: flex;
     flex-direction: column;
@@ -53,10 +50,6 @@
     color: #BBDBFA;
 }
 
-/* label {
-    display: block;
-    margin-bottom: 0.5vh;
-} */
 
 input[type="text"],
 input[type="password"] {
@@ -131,7 +124,7 @@ input[type="password"] {
 }
 
 .rightContent .submitButton:hover {
-    background-color: #146ab6; /* A slightly darker shade of blue */
+    background-color: #146ab6; 
 }
 
 .rightContent {
@@ -169,6 +162,8 @@ input[type="password"] {
 .imageContainer {
     position: relative;
     left: 0;
+    height: 100%;
+    width: 50vw;
 }
 
 .welcomeImage {
