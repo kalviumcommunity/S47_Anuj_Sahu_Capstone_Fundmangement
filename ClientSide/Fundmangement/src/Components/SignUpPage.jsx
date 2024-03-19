@@ -1,11 +1,15 @@
 import React from 'react'
+import SignUp from './DiffrentUI parts/SignUp/Main'
+
+
 
 function SignUpPage() {
-return (
-    <div>
-        <h1>Welcome to the Signup page</h1>
-    </div>
-)
+    return (
+        <>
+            <SignUp/>
+        </>
+
+    )
 }
 
 export default SignUpPage
