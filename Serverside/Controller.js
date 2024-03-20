@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const UserDataSignUp = require("./usermodel.js")
 const signupSchema  = require('./Validators/SignupValidate.js')
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken')
 
 
 
@@ -19,7 +20,7 @@ exports.signup = async(req,res) =>{
         const {value,error} = signupSchema.validate(req.body)
 
         if(error){
-                res.send(error.message)
+                return res.send(error.message)
             }
             
         const hashPassword = crypto.createHash('sha256').update(value.password).digest('base64')
@@ -33,10 +34,39 @@ exports.signup = async(req,res) =>{
     
     }
     catch(error){
-        res.status(500).send("Internal Server Error");
+        return res.status(500).send("Internal Server Error");
     }
 
     }
+
+
+exports.login = async(req,res) =>{
+    try{
+        const {userName,password} = req.body
+        
+        const hashPasswordLogin = crypto.createHash('sha256').update(password).digest('base64')
+
+        const user = await UserDataSignUp.findOne({userName: userName,password: hashPasswordLogin})
+
+        if(!user){
+            return res.send("Invalid UserName/Password")
+
+        }
+
+        const JWToken = jwt.sign({userId:user._id},process.env.JWTKEY)
+        console.log(JWToken, user.userName)
+
+        // res.cookie('JWToken', JWToken, { httpOnly: true },{ expiresIn: '5h' });
+        res.status(200).send("Login Successfully")
+        
+
+    }
+    catch (error){
+        res.status(500).send("Internal Server Error")
+    }
+}
+
+
     
 
 
