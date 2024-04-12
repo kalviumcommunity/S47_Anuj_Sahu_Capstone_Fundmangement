@@ -14,15 +14,21 @@
     color: #084C90;
 }
 
+.banners{
+    display: flex;
+    align-items: center;
+    background-color: #BBDBFA;
+}
+
 .bannerImages {
     width: 100vw;
-    height: 55vh;
+    height: 70vh;
     
 }
 
 .bigbanner img{
    overflow: hidden;
-   width:1150px;
+   width:100vh;
 }
 
 .whyChooseUs {
@@ -145,4 +151,6 @@
 .servicesSection .exploreButton button:hover {
     background-color: #0056b3;
 }
+
+
 

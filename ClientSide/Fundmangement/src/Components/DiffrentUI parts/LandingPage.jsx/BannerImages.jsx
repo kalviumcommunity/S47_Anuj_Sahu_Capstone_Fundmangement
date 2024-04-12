@@ -1,10 +1,17 @@
-import image1 from '/src/assets/Banners/capstone random image1.jpg'
-import image2 from '/src/assets/Banners/random images 2.jpeg'
+
+import banner1 from "/src/assets/Banners/Banner1.png"
+import banner2 from "/src/assets/Banners/Banner2.png"
+import banner3 from "/src/assets/Banners/Banner3.png"
+import banner4 from "/src/assets/Banners/Banner4.png"
+
+
 
 
 const bannerImages = [
-    image1,
-    image2,
+    banner1,
+    banner2,
+    banner3,
+    banner4
 
 
 ]
