@@ -3,12 +3,14 @@ import bannerImages from './BannerImages'
 import styles from './Main.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import shareImg from '/src/assets/Banners/capstone image 3.jpeg'
+import videoSrc from '/src/assets/Banners/Transform Your Finances with Morpheus Funds! - Wide Landscape.mp4';
+import ReactPlayer from 'react-player';
 
 
 
 function Main() {
     const [currentIndex,setCurrentIndex] = useState(0)
-
+    const [playing, setPlaying] = useState(false);
     useEffect(()=>{
         const changeImage = setInterval(()=>{
             setCurrentIndex(prevIndex => (prevIndex + 1) % bannerImages.length);
@@ -51,10 +53,20 @@ return (
                     <p>We prioritize timely delivery of our services, ensuring you meet your deadlines and objectives efficiently.</p>
                 </div>
             </div>
-            <div className={styles.bigbanner}>
-                <img src={bannerImages[1]} alt="" />
-            </div>
+            
         </section>
+        <section className={styles.bigbanner}>
+                <ReactPlayer
+                    url={videoSrc}
+                    playing={true}
+                    loop={true}
+                    controls={true}
+                    width='100vw'
+                    height='80vh'   
+                >
+                {/* <video src={videoSrc}  type="video/mp4" autoPlay loop muted className={styles.video} /> */}
+                </ReactPlayer>
+            </section>
         <section className={styles.enimationSection}>
                 <div>
                     <img src={bannerImages[1]} alt="" className={styles.imageContainer} />

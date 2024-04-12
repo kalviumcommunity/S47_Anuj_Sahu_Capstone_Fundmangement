@@ -8,6 +8,7 @@ import Profile from './Profile'
 function Home() {
     return (
         <div>
+            <Link to='/appointment'><button>Book Appointment</button></Link>
             <Nav/>
             <Main/>
             <Footer/>
