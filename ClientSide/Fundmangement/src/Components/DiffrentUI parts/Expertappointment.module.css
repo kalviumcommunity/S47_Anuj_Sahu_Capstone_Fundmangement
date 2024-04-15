@@ -1,46 +1,48 @@
-.expert-appointment-container {
+/* ExpertCard.css */
+
+.expert-card {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-.card {
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    width: 300px;
-    margin: 10px;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in-out; /* Added transform transition */
-}
-
-.card.hidden {
-    transform: translateY(100%); /* Move the card outside the viewport */
-}
-
-.card h2 {
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .expert-img img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .expert-details {
+    flex: 1;
+  }
+  
+  .expert-details h2 {
+    margin: 0;
     font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.card p {
+    color: #333;
+  }
+  
+  .expert-details p {
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  .book-btn {
+    padding: 10px 20px;
     font-size: 1rem;
-    margin-bottom: 15px;
-}
-
-.card button {
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.card button:hover {
+    transition: background-color 0.3s;
+  }
+  
+  .book-btn:hover {
     background-color: #0056b3;
-}
+  }
