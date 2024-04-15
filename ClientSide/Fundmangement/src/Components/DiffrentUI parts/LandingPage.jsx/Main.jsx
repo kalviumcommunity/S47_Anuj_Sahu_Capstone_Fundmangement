@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import shareImg from '/src/assets/Banners/capstone image 3.jpeg'
 import videoSrc from '/src/assets/Banners/Transform Your Finances with Morpheus Funds! - Wide Landscape.mp4';
 import ReactPlayer from 'react-player';
+import { Link } from 'react-router-dom';
 
 
 
@@ -64,7 +65,6 @@ return (
                     width='100vw'
                     height='80vh'   
                 >
-                {/* <video src={videoSrc}  type="video/mp4" autoPlay loop muted className={styles.video} /> */}
                 </ReactPlayer>
             </section>
         <section className={styles.enimationSection}>
@@ -79,24 +79,65 @@ return (
                 </div>
         </section>
         <section className={styles.servicesSection}>
-                <div className={styles.card}>
-                    <h2>Stock Recommendation</h2>
-                    <p>Receive personalized stock recommendations.</p>
-                    <img src={shareImg} alt="" />
+            <div className={styles.cardContainer}>
+                <div className={styles.card} id="stockCard">
+                    <div className={styles.cardInner}>
+                        <div className={styles.cardFront}>
+                            <h2>Stock Recommendation</h2>
+                            <p>Receive personalized stock recommendations.</p>
+                            <img src={shareImg} alt="" />
+                        </div>
+                        <div className={styles.cardBack}>
+                            <h2>Back Content</h2>
+                            <p>This is the back of the card.</p>
+                        </div>
+                    </div>
                 </div>
-                <div className={styles.card}>
-                    <h2>Expert Advice</h2>
-                    <p>Get expert advice from seasoned professionals.</p>
-                    <img src={shareImg} alt="" />                </div>
-                <div className={styles.card}>
-                    <h2>Tax Calculation</h2>
-                    <p>Accurate tax calculations tailored to your needs.</p>
-                    <img src={shareImg} alt="" />                </div>
-                <div className={styles.card}>
-                    <h2>Market News</h2>
-                    <p>Stay updated with the latest market news and trends.</p>
-                    <img src={shareImg} alt="" />                </div>
+
+                <div className={styles.card} id="expertAdviceCard">
+                    <div className={styles.cardInner}>
+                        <div className={styles.cardFront}>
+                            <h2>Expert Advice</h2>
+                            <p>Get expert advice from seasoned professionals.</p>
+                            <img src={shareImg} alt="" />
+                        </div>
+                        <div className={`${styles.cardBack} ${styles.appointment}`}>
+                            <Link to='/appointment'><button className={styles.bookappointment}>Appointment</button></Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.card} id="taxCalculationCard">
+                    <div className={styles.cardInner}>
+                        <div className={styles.cardFront}>
+                            <h2>Tax Calculation</h2>
+                            <p>Accurate tax calculations tailored to your needs.</p>
+                            <img src={shareImg} alt="" />
+                        </div>
+                        <div className={styles.cardBack}>
+                            <h2>Back Content</h2>
+                            <p>This is the back of the card.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.card} id="marketNewsCard">
+                    <div className={styles.cardInner}>
+                        <div className={styles.cardFront}>
+                            <h2>Market News</h2>
+                            <p>Stay updated with the latest market news and trends.</p>
+                            <img src={shareImg} alt="" />
+                        </div>
+                        <div className={styles.cardBack}>
+                            <h2>Back Content</h2>
+                            <p>This is the back of the card.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
+
+        
 
     </main>
 )
