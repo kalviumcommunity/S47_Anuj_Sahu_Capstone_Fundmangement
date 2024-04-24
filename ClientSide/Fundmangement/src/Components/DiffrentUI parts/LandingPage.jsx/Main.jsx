@@ -59,7 +59,6 @@ return (
         <section className={styles.bigbanner}>
                 <ReactPlayer
                     url={videoSrc}
-                    playing={true}
                     loop={true}
                     controls={true}
                     width='100vw'
