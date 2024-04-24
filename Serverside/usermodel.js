@@ -19,6 +19,25 @@ const UserInfromation = new mongoose.Schema({
 
 })
 
+
+const ProfileSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    profilePhoto: {
+        type: String,
+        required: true
+    }
+});
+
+const expertData = mongoose.model('expertsdetails', ProfileSchema);
+
+
 const UserDataSignUp = mongoose.model('users', UserInfromation )
 
-module.exports = UserDataSignUp
+module.exports ={ UserDataSignUp,expertData}

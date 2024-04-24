@@ -24,7 +24,6 @@ async function sendOtp(email) {
 
 
     const otpsent = await transporter.sendMail(mailOptions);
-    console.log(otpsent)
 }
 
 module.exports = sendOtp;
