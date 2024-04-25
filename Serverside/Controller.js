@@ -4,6 +4,7 @@ const signupSchema = require('./Validators/SignupValidate.js')
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
 const sendOtp = require('./Validators/emailOtp.js');
+const JWToken  = require('./Validators/routeValidation.js')
 const axios = require('axios');
 const request = require('request');
 const jwt_decode = require('jwt-decode');
@@ -60,14 +61,14 @@ exports.login = async (req, res) => {
         const hashPasswordLogin = crypto.createHash('sha256').update(password).digest('base64');
 
         const user = await UserDataSignUp.findOne({ userName: username, password: hashPasswordLogin });
-        console.log(user);
+        
 
         if (!user) {
             return res.status(401).send("Invalid UserName/Password");
         }
 
-        const JWToken = jwt.sign({ userId: user._id }, process.env.JWTKEY);
-        console.log(JWToken);
+        const JWToken = jwt.sign({ userId: user.email }, process.env.JWTKEY);
+        
 
         // Send the JWT token in the response
         res.status(200).json({ token: JWToken });
@@ -107,15 +108,22 @@ exports.anuj = async (req, res) => {
     }
 }
 
+
+
 exports.expert = async (req, res) => {
     try {
-        const expertsdetails = await expertData.find();
-        res.status(201).json(expertsdetails);
+        // Call the JWT token validator middleware
+        JWToken (req, res, async () => {
+            // JWT token is valid, proceed with the route logic
+            const expertsdetails = await expertData.find();
+            res.status(201).json(expertsdetails);
+        });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).send("Internal Server Error");
     }
 }
+
 
 exports.homeRoute = (req, res) => {
     res.send("I am the home route")
