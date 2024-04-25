@@ -1,26 +1,29 @@
-const jwt = require('jsonwebtoken')
+// Validators/routeValidation.js
 
-exports.JWTtoken = (req,res,next)=>{
-    try{
-        const token = req.cookies.JWToken
+const jwt = require('jsonwebtoken');
 
-        if(!token){
-            return res.status(401).send("Access Denied")
+const JWToken = (req, res, next) => {
+    try {
+        const token = req.headers.authorization; 
+        
+
+        if (!token) {
+            return res.status(401).send("Access Denied");
         }
 
         try {
             const decoded = jwt.verify(token, process.env.JWTKEY);
-            console.log(decoded)
+            // console.log(decoded);
 
             next();
         } catch (error) {
-            res.status(400).send('Invalid Token');
+            console.error(error); 
         }
 
-
-
-    }catch(error){
-        res.send("Internal Server Error")
+    } catch (error) {
+        res.status(500).send("Internal Server Error");
+        console.error(error); // Log the error for debugging purposes
     }
+};
 
-}
+module.exports = JWToken;
