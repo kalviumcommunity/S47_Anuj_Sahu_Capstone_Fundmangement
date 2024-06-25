@@ -1,0 +1,60 @@
+body {
+    color: white;
+}
+
+.footer {
+    background-color: #084C90;
+    padding: 4vw 2vw;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerColumn {
+    flex: 1;
+}
+
+.footerColumn h3 {
+    font-size: 2vw;
+    margin-bottom: 2vw;
+}
+
+.footerLinks,
+.contactInfo {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks li,
+.contactInfo li {
+    margin-bottom: 2vw;
+}
+
+.socialLinks {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.socialLinks li {
+    margin-right: 2vw;
+}
+
+.socialLinks a {
+    color: #333;
+    font-size: 2vw;
+}
+
+.footerBottom {
+    margin-top: 2vh;
+    text-align: center;
+    font-size: 1vw;
+}
+
+.footerLinks li a , .Email a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5vw;
+}
