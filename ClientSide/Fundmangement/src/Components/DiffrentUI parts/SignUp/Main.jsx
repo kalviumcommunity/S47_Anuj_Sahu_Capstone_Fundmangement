@@ -1,9 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import LoSiCommon from '../LoginPage/LoSiCommon';
 import styles from './Main.module.css';
+import { GoogleLogin } from '@react-oauth/google';
+// import jwt_decode from 'jwt-decode'
+
 
 function SignUp() {
+    const navigate = useNavigate(); 
+    const responseGoogle = (response) => {
+        import('jwt-decode').then(jwt_decode => {
+            const token = response.credential
+            const decodedToken = jwt_decode.jwtDecode(token);
+            console.log(decodedToken)
+            const {email,family_name,given_name}=decodedToken
+            console.log(email,given_name,family_name);
+            navigate('/')
+          }).catch(error => {
+            console.log(error)
+          });
+        
+    };
+
     return (
         <div className={styles.wholepage}>
             <LoSiCommon />
@@ -28,8 +46,20 @@ function SignUp() {
                     </div>
                     <button className={styles.signup}>Sign Up</button>
                     <Link to="/login"><button className={styles.login}>Login</button></Link>
-                    <hr />Or continue with
-                    <button type="button" className={styles.googleButton}>Sign Up with Google</button>
+                    <hr />
+                    <p>Or continue with</p>
+                    <button style={{marginTop:'1vh'}}>
+                        <GoogleLogin
+                            clientId="496937648657-nmdgnmp32lm37u5nr11sl6crottlpn6a.apps.googleusercontent.com"
+                            buttonText="Sign Up with Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            scope="profile email"
+                            
+                        />
+                    </button>
+                    
+                    {/* <button type="button" className={styles.googleButton}>Sign Up with Google</button> */}
                 </form>
             </section>
         </div>

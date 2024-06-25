@@ -4,10 +4,15 @@ import Nav from './DiffrentUI parts/LandingPage.jsx/Nav'
 import Main from './DiffrentUI parts/LandingPage.jsx/Main'
 import Footer from './DiffrentUI parts/LandingPage.jsx/Footer'
 import Profile from './Profile'
+import Load from './DiffrentUI parts/Load'
+import Loader from './DiffrentUI parts/Loder/Loader'
 
 function Home() {
     return (
         <div>
+            <Loader/>
+            {/* <Load/> */}
+            
             <Nav/>
             <Main/>
             <Footer/>

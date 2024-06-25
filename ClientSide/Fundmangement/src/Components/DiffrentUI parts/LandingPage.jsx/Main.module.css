@@ -14,15 +14,21 @@
     color: #084C90;
 }
 
+.banners{
+    display: flex;
+    align-items: center;
+    background-color: #BBDBFA;
+}
+
 .bannerImages {
     width: 100vw;
-    height: 55vh;
+    height: 70vh;
     
 }
 
 .bigbanner img{
    overflow: hidden;
-   width:1150px;
+   width:100vh;
 }
 
 .whyChooseUs {
@@ -146,3 +152,102 @@
     background-color: #0056b3;
 }
 
+
+
+.servicesSection .cardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.servicesSection .card:hover .cardInner {
+    transform: rotateY(180deg);
+}
+
+.servicesSection .cardFront,
+.servicesSection .cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.servicesSection .cardBack {
+    transform: rotateY(180deg);
+}
+
+.servicesSection .card {
+    position: relative;
+    width: 300px;
+    height: 45vh; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    perspective: 1000px;
+    background-color: #ffffff;
+    margin-bottom: 5vh;
+}
+
+.servicesSection .card h2,
+.servicesSection .card p {
+    margin: 0;
+}
+
+.appointment{
+    background-color: #084C90;
+}
+
+
+
+.bookappointment {
+        --color: #BBDBFA;
+        font-family: inherit;
+        display: inline-block;
+        width: 8em;
+        height: 2.6em;
+        line-height: 2.5em;
+        margin: 20px;
+        position: relative;
+        top: 10vh;
+        overflow: hidden;
+        border: 2px solid var(--color);
+        transition: color .5s;
+        z-index: 1;
+        font-size: 1.3vw;
+        border-radius: 6px;
+        font-weight: 500;
+        color: #01386e;
+       }
+       
+       .bookappointment:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: var(--color);
+        height: 150px;
+        width: 200px;
+        border-radius: 50%;
+        color: white;
+       }
+       
+       .bookappointment:hover {
+        color: #ffffff;
+       }
+       
+       .bookappointment:before {
+        top: 100%;
+        left: 100%;
+        transition: all .7s;
+       }
+       
+       .bookappointment:hover:before {
+        top: -30px;
+        left: -30px;
+       }
+       
+       .bookappointment:active:before {
+        background: #0d3e6f;
+        transition: background 0s;
+       }
