@@ -1,5 +1,6 @@
 const otplib = require('otplib');
 const nodemailer = require('nodemailer');
+// const client = require('./redisClient.js')
 
 async function sendOtp(email) {
     const transporter = nodemailer.createTransport({
@@ -22,7 +23,7 @@ async function sendOtp(email) {
         text: `Your Otp is ${otp}`
     };
 
-
+    // client.setex(email, 3000, otp)
     const otpsent = await transporter.sendMail(mailOptions);
 }
 

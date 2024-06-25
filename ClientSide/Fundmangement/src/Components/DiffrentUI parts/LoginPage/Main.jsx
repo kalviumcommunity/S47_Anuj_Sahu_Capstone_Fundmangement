@@ -9,7 +9,7 @@ import axios from 'axios';
 
 function Login() {
     const [formData, setFormData] = useState({
-        username: '',
+        userName: '',
         password: ''
     });
     const [loginError, setLoginError] = useState(false);
@@ -23,16 +23,20 @@ function Login() {
         });
     };
 
+     // Function to set a cookie
+    const setCookie = (name, value, maxAge,path) => {
+        document.cookie = `${name}=${value}; max-age=${maxAge}; path=${path}`;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:3000/login', formData);
-            console.log(response.data);
-
-            // Check if the response contains a token
+            // Checking if the response contains a token
             if (response.data.token) {
-                setCookie('JWToken', response.data.token, 5 * 60 * 60 * 1000); 
-                navigate('/')
+                setCookie('userName',formData.userName,30*60*60*1000,'/')
+                setCookie('JWToken', response.data.token, 5 * 60 * 60 * 1000,'/'); 
+                navigate(-1);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -40,10 +44,8 @@ function Login() {
         }
     };
 
-    // Function to set a cookie
-    const setCookie = (name, value, maxAge) => {
-        document.cookie = `${name}=${value}; max-age=${maxAge}; path=/`;
-    };
+   
+    
 
     return (
         <div className={styles.wholepage}>
@@ -55,13 +57,13 @@ function Login() {
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <h2>Login</h2>
                     <div className={styles.formGroup}>
-                        <input type="text" id="username" name="username" placeholder='username' value={formData.username} onChange={handleChange} />
+                        <input type="text" id="userName" name="userName" placeholder='userName' value={formData.userName} onChange={handleChange} />
                     </div>
                     <div className={styles.formGroup}>
                         <input type="password" id="password" name="password" placeholder='Password' value={formData.password} onChange={handleChange} />
                         <label className={styles.forget}>Forget Password</label>
                     </div>
-                    {loginError && <p className={styles.error}>Incorrect username or password. Please try again.</p>}
+                    {loginError && <p className={styles.error}>Incorrect userName or password. Please try again.</p>}
                     <button type="submit" className={styles.login}>LOGIN</button>
                     <Link to='/signup'><button className={styles.signup}>SignUp</button></Link>
                     <hr />Or continue with

@@ -61,7 +61,7 @@ return (
                     url={videoSrc}
                     loop={true}
                     controls={true}
-                    width='100vw'
+                    width='100%'
                     height='80vh'   
                 >
                 </ReactPlayer>
@@ -87,8 +87,7 @@ return (
                             <img src={shareImg} alt="" />
                         </div>
                         <div className={styles.cardBack}>
-                            <h2>Back Content</h2>
-                            <p>This is the back of the card.</p>
+                            <Link to='/stocks'><button className={styles.bookappointment}>Explore Stocks</button></Link>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
 .upperNav {
     position: sticky;
     top: 0;
-    width: 100vw;
+    width: 100%;
     height: 10vh;
     background-color: #084C90;
     display: flex;
@@ -51,7 +51,7 @@
 }
 
 .lowerNav{
-    width: 100vw;
+    width: 100%;
     height: 6vh;
     background-color: #BBDBFA;
     display: flex;
@@ -104,7 +104,7 @@
 .lowerprofilecard{
     background-color: #BBDBFA;
     border-radius: 0 0 1vw 1vw;
-    height: 35vh;
+    height: 40vh;
     width: 20vw;
     padding-left: 0%;
     margin-right: 2.5vw;
@@ -130,12 +130,17 @@
     cursor: pointer;
 }
 
+.features:hover{
+    scale: 1.1;
+    font-size: bold;
+}
+
 .logout{
     position: absolute;
     height: 4.5vh;
     width: 4vw;
     border-radius: 0.5vw;
-    top: 33vh;
+    top: 38vh;
     left: 1vw;
     background-color: transparent;
     color:#007bff;
@@ -167,24 +172,7 @@
     margin-top: -11px;
     margin-left: 4px;
   }
-/* .editBtn::before {
-    content: "";
-    width: 200%;
-    height: 200%;
-    background-color: #0056b3;
-    position: absolute;
-    z-index: 1;
-    transform: scale(0);
-    transition: all 0.3s;
-    border-radius: 50%;
-    filter: blur(10px);
-} */
-/* .editBtn:hover::before {
-    transform: scale(1);
-}
-.editBtn:hover {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.336);
-} */
+
 
 .editBtn svg {
     height: 2vh;
@@ -196,22 +184,3 @@
 .editBtn:hover svg {
     transform: rotate(-15deg) translateX(5px);
 }
-/* .editBtn::after {
-    content: "";
-    width: 25px;
-    height: 1.5px;
-    position: absolute;
-    bottom: 19px;
-    left: -5px;
-    background-color: white;
-    border-radius: 2px;
-    z-index: 2;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s ease-out;
-} */
-/* .editBtn:hover::after {
-    transform: scaleX(1);
-    left: 0px;
-    transform-origin: right;
-} */
