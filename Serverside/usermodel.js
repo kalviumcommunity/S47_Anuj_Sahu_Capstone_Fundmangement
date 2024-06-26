@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 
 const UserInfromation = new mongoose.Schema({
@@ -9,15 +10,22 @@ const UserInfromation = new mongoose.Schema({
         type: String,
         required: true
     },
-
     password : {
         type:String,
         required: true
     },
-
-    
+    payment:{
+        type:Number,
+        default:0
+    },
+    appointmentBook:{
+        type:Number,
+        default:0
+    }
 
 })
+
+const UserDataSignUp = mongoose.model('users', UserInfromation )
 
 
 const ProfileSchema = new mongoose.Schema({
@@ -38,6 +46,5 @@ const ProfileSchema = new mongoose.Schema({
 const expertData = mongoose.model('expertsdetails', ProfileSchema);
 
 
-const UserDataSignUp = mongoose.model('users', UserInfromation )
 
 module.exports ={ UserDataSignUp,expertData}

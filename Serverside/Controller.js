@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 const { UserDataSignUp, expertData } = require("./usermodel.js")
 const signupSchema = require('./Validators/SignupValidate.js')
@@ -8,6 +9,7 @@ const JWToken  = require('./Validators/routeValidation.js')
 const axios = require('axios');
 const request = require('request');
 const jwt_decode = require('jwt-decode');
+const { log } = require('console');
 const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
 
 exports.startDatabase = async () => {
@@ -21,31 +23,36 @@ exports.startDatabase = async () => {
 
 exports.signup = async (req, res) => {
     try {
-        const { value, error } = signupSchema.validate(req.body)
-        
-        if(error){
-            res.send(error)
+        const { value, error } = signupSchema.validate(req.body);
+        console.log(value)
+
+        if (error) {
+            return res.status(400).send(error); // Return early if validation fails
         }
 
-        const hashPassword = crypto.createHash('sha256').update(value.password).digest('base64')
-        const newUser = UserDataSignUp.create({
+        const hashPassword = crypto.createHash('sha256').update(value.password).digest('base64');
+        console.log(hashPassword,"passsword hashed" )
+        // Assuming UserDataSignUp.create() returns a promise that resolves to newUser
+        const newUser = await UserDataSignUp.create({
             userName: value.userName,
             email: value.email,
-            password: hashPassword
-        })
-        const JWToken = jwt.sign(value.userName, process.env.JWTKEY)
+            password: hashPassword,
+            payment:0,
+            appointmentBook:0
+        });
+        console.log(newUser,'Anuj sahu NEW user')
+
+        const JWToken = jwt.sign({ userName: value.username }, process.env.JWTKEY);
         console.log(JWToken);
 
         res.cookie('JWToken', JWToken);
-        res.status(200).send("Sign up Successfully")
+        return res.status(200).send("Sign up Successfully");
 
-    }
-    catch (error) {
+    } catch (error) {
+        console.error('Error in signup:', error);
         return res.status(500).send("Internal Server Error");
     }
-
-}
-
+};
 exports.googlelogin = (req, res) =>{
     const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZjZTExYWVjZjllYjE0MDI0YTQ0YmJmZDFiY2Y4YjMyYTEyMjg3ZmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0OTY5Mzc2NDg2NTctbm1kZ25tcDMybG0zN3U1bnIxMXNsNmNyb3R0bHBuNmEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0OTY5Mzc2NDg2NTctbm1kZ25tcDMybG0zN3U1bnIxMXNsNmNyb3R0bHBuNmEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIxMTYwNTg0NjQyNDkxMTU1MTYiLCJlbWFpbCI6ImFudWpzYWh1MTk1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYmYiOjE3MTM4NDcyMjgsIm5hbWUiOiJBbnVqIFNhaHUiLCJnaXZlbl9uYW1lIjoiQW51aiIsImZhbWlseV9uYW1lIjoiU2FodSIsImlhdCI6MTcxMzg0NzUyOCwiZXhwIjoxNzEzODUxMTI4LCJqdGkiOiIwZTQ0NDJkZGJjZmZhOTI4ZTllZjNkNzVkYTdjZjMyMDdjYTE4MTMzIn0.aCM7NqZwDJrhoAapX-hlv3NR2L6HeAwFr9LNXV_hk_B5-93FDf1lX-NcMFHFcMlq7OJN7sDStbcIeH40msWTIz3xQRN_NxXkfLeMYOqw9qiC9qSnIMWsi6RX7022cSAUN0o-Ik-jrhJkHyBCik50sVMOuZDgki2lX8lCTDGYyITm_OwJHI5B_iEt7pZqMeSeJbqGC2S6UDL0zRuSG-GA8pjt7c_LxgVL_nk9YC3RD2783cH7JzrenDc7E9gZY3-BPjdJwzeTAvO5HiyiJrzWXeDuh4MmGHOgzSZTICGFtGdX-OLje4NgyLyO2yQPmPvIsja3W2Sofj4TMVH04XrJjA"; // Assuming credential contains the JWT token
     const decodedToken = jwt_decode.jwtDecode(token);
@@ -55,22 +62,22 @@ exports.googlelogin = (req, res) =>{
 
 exports.login = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        console.log(username, password);
+        const { userName, password } = req.body;
+        console.log(req.body,"I am req body")
+        console.log(userName, password);
 
         const hashPasswordLogin = crypto.createHash('sha256').update(password).digest('base64');
+        console.log(hashPasswordLogin)
 
-        const user = await UserDataSignUp.findOne({ userName: username, password: hashPasswordLogin });
-        
+        const user = await UserDataSignUp.findOne({ userName: userName, password: hashPasswordLogin });
+        console.log(user);
 
         if (!user) {
             return res.status(401).send("Invalid UserName/Password");
         }
-
         const JWToken = jwt.sign({ userId: user.email }, process.env.JWTKEY);
-        
-
-        // Send the JWT token in the response
+        res.cookie('JWToken', JWToken, { httpOnly: true },{ expiresIn: '5h' });
+        // res.status(200).send("Login Successfully")
         res.status(200).json({ token: JWToken });
     } catch (error) {
         console.error(error);
@@ -78,6 +85,31 @@ exports.login = async (req, res) => {
     }
 };
 
+
+
+
+
+
+exports.expert = async (req, res) => {
+    try {
+        // Calling the JWT token validator middleware
+        JWToken(req, res, async () => {
+            const expertsdetails = await expertData.find();
+            res.status(201).json(expertsdetails);
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+
+exports.homeRoute = (req, res) => {
+    res.send("I am the home route")
+}
+exports.auth = (req, res) => {
+    res.send("you are authorize")
+}
 
 exports.anuj = async (req, res) => {
     try {
@@ -110,40 +142,18 @@ exports.anuj = async (req, res) => {
 
 
 
-exports.expert = async (req, res) => {
-    try {
-        // Call the JWT token validator middleware
-        JWToken (req, res, async () => {
-            // JWT token is valid, proceed with the route logic
-            const expertsdetails = await expertData.find();
-            res.status(201).json(expertsdetails);
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Internal Server Error");
-    }
-}
-
-
-exports.homeRoute = (req, res) => {
-    res.send("I am the home route")
-}
-exports.auth = (req, res) => {
-    res.send("you are authorize")
-}
-
-
-
-async function fetchRiskData(symbol) {
+exports.fetchRiskData = async(symbol)=> {
     const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
     const url = `https://www.alphavantage.co/query?function=BETA&symbol=${symbol}&apikey=${apiKey}`;
 
     try {
         const response = await axios.get(url);
         const data = response.data;
+        console.log(data);
 
         if (data['Meta Data']) {
             const beta = data['Meta Data']['Beta'];
+            console.log(beta);
             return { success: true, beta };
         } else if (data['Error Message']) {
             return { success: false, error: data['Error Message'] };
@@ -174,3 +184,5 @@ exports.fetchRiskDataController = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
+// fetchRiskData('TCS');

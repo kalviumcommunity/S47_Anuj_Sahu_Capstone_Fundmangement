@@ -1,48 +1,129 @@
-/* ExpertCard.css */
+.introContainer {
+  background-color: #77afe7; 
+  padding: 4vw; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
 
-.expert-card {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+.introText {
+  color: #084C90; 
+  font-size: 2vw; 
+  line-height: 1.6; 
+  font-style:italic;
+  font-family: 'Jacques Francois', sans-serif;
+}
+
+.selectExpert {
+  text-align: center;
+  margin-top: 5vh;
+  margin-left: auto; 
+  margin-right: auto; 
+  margin-bottom: 5vh;
+  background-color: #BBDBFA;
+  width: 80vw; 
+  padding: 20px; 
+}
+
+.selectExpert h1 {
+font-weight: 500;
+font-size: 4vw;
+color: #084C90;
+overflow: hidden;
+white-space: nowrap;
+margin: 0 auto;
+letter-spacing: .15em;
+animation: typing 3.5s steps(40, end) infinite, blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+from { width: 0 }
+to { width: 100% }
+}
+
+@keyframes blink-caret {
+from, to { border-color: transparent }
+50% { border-color: orange; }
+}
+
+.expertContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   
-  .expert-img img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-  }
+}
+
+.expertDetails:hover{
+  scale: 1.02;
+}
+
+.expertDetails {
+  background-color: #77afe7;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 30vw;
+}
+
+.imageAndName {
+  display: flex;
+  justify-content: center;
+}
+
+.userImage {
+  width: 5.7vw;
+  height: 13vh;
+  border-radius: 50%;
+  max-width: inherit;
+  text-align: center;
+  word-wrap: break-word;
+  object-fit: cover;
+  margin-bottom: 1vh;
+  margin: 1vw;
+}
+
+.imageAndName h1{
+  display: flex;
+  color:#084C90;
+  align-items: center;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  text-align: center;
+  justify-content: center;
+  vertical-align:middle
+}
+
+.experience {
+  margin-top: 1vh;
+  text-align: center;
+}
+
+.bookBtn {
+  text-align: center;
+  margin-top: 2vh;
   
-  .expert-details {
-    flex: 1;
-  }
-  
-  .expert-details h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .expert-details p {
-    margin: 10px 0;
-    color: #666;
-  }
-  
-  .book-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .book-btn:hover {
-    background-color: #0056b3;
-  }
+}
+
+.bookBtn button {
+  position: relative;
+  background-color: #f8fcff;
+  width: 8vw;
+  color:#084C90;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  font-size: 1.5vw;
+  overflow: hidden; /* Hide overflow for pseudo-element */
+  transition: color 0.3s ease;
+}
+
+.bookBtn button:hover{
+  background-color: #084C90;
+  scale: 1.03;
+  color: #f8fcff;
+  transition: all 1s;
+}
+
+.bookBtn button::after{
+  scale:-1;
+}
