@@ -1,3 +1,4 @@
+
 const stockData = {
     name: 'TATA',
     ticker: 'TCS',
