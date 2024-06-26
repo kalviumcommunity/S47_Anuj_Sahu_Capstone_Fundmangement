@@ -17,7 +17,7 @@ body {
 }
 
 .footerColumn h3 {
-    font-size: 2vw;
+    font-size: 2.1vw;
     margin-bottom: 2vw;
 }
 
@@ -25,7 +25,10 @@ body {
 .contactInfo {
     list-style: none;
     padding: 0;
+    color: aliceblue;
 }
+
+
 
 .footerLinks li,
 .contactInfo li {
@@ -39,11 +42,11 @@ body {
 }
 
 .socialLinks li {
-    margin-right: 2vw;
+    margin-right: 1.8vw;
 }
 
 .socialLinks a {
-    color: #333;
+    color: #ebe8e6;
     font-size: 2vw;
 }
 
@@ -56,5 +59,5 @@ body {
 .footerLinks li a , .Email a {
     text-decoration: none;
     color: white;
-    font-size: 1.5vw;
+    font-size: 1.2vw;
 }
