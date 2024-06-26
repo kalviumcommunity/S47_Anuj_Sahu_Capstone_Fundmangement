@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styles from './Payment.module.css';
 import axios from 'axios'
@@ -11,19 +10,18 @@ function Payment() {
     const max = 99999999;
     const receiptId = `${Math.floor(min + Math.random() * (max - min + 1))}`;
 
-
     const paymentHandler =async (e) =>{
         const res = await axios.post("http://localhost:3000/payments",{amount,currency,receipt : receiptId})
         const userName = Cookies.get('userName');
         console.log(userName)
         var options = {
-            "key": "rzp_test_tzk3VRcYS0ZRsO", // Enter the Key ID generated from the Dashboard
-            amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "key": "rzp_test_tzk3VRcYS0ZRsO",
+            amount,
             currency,
-            "name": "Morpheous Funds", //your business name
+            "name": "Morpheous Funds",
             "description": "Please pay the amount to book a meeting with our expert.",
             "image": "https://example.com/your_logo",
-            "order_id": res.data.id, //This is a sample Order ID. Pass the id obtained in the response of Step 1
+            "order_id": res.data.id,
             "handler": async function (response){
                 const body = {
                     ...response,
@@ -48,8 +46,8 @@ function Payment() {
         e.preventDefault();
     }
     return (
-        <div className={styles.paymentContainer}>
-            <h1 className={styles.heading} onClick={paymentHandler}>Pay Now</h1>
+        <div>
+            <button className={styles.heading} onClick={paymentHandler}>Pay Now</button>
         </div>
     );
 }
