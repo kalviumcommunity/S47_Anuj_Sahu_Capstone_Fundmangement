@@ -6,7 +6,7 @@ import shareImg from '/src/assets/Banners/capstone image 3.jpeg'
 import videoSrc from '/src/assets/Banners/Transform Your Finances with Morpheus Funds! - Wide Landscape.mp4';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-
+import SIP from '/src/assets/Banners/SIP.jpg'
 
 
 function Main() {
@@ -61,19 +61,19 @@ return (
                     url={videoSrc}
                     loop={true}
                     controls={true}
-                    width='100%'
+                    width='100vw'
                     height='80vh'   
                 >
                 </ReactPlayer>
             </section>
         <section className={styles.enimationSection}>
                 <div>
-                    <img src={bannerImages[1]} alt="" className={styles.imageContainer} />
+                    <img src={SIP} alt="" className={styles.imageContainer} />
                 </div>
                 <div className={styles.cardContainer}>
                     <div className={styles.card}>
-                        <h2>Some Text Here</h2>
-                        <p>This is a placeholder text for the card.</p>
+                        <h2>SIP</h2>
+                        <p>Systematic Investment Plan (SIP) allows investors to invest a fixed amount regularly in mutual funds. It promotes disciplined saving, reduces market timing risk, and benefits from rupee cost averaging and compounding. SIPs are flexible, convenient, and suitable for long-term wealth creation.</p>
                     </div>
                 </div>
         </section>
@@ -87,7 +87,7 @@ return (
                             <img src={shareImg} alt="" />
                         </div>
                         <div className={styles.cardBack}>
-                            <Link to='/stocks'><button className={styles.bookappointment}>Explore Stocks</button></Link>
+                            <h2>Coming Soon</h2>
                         </div>
                     </div>
                 </div>
@@ -113,8 +113,7 @@ return (
                             <img src={shareImg} alt="" />
                         </div>
                         <div className={styles.cardBack}>
-                            <h2>Back Content</h2>
-                            <p>This is the back of the card.</p>
+                            <h2>Coming Soon</h2>
                         </div>
                     </div>
                 </div>
@@ -127,8 +126,8 @@ return (
                             <img src={shareImg} alt="" />
                         </div>
                         <div className={styles.cardBack}>
-                            <h2>Back Content</h2>
-                            <p>This is the back of the card.</p>
+                            <h2>Coming Soon</h2>
+                            
                         </div>
                     </div>
                 </div>
