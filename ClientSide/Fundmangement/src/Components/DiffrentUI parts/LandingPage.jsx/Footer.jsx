@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Footer.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 
@@ -26,10 +27,11 @@ function Footer() {
                         <li>Phone: 7049898650</li>
                     </ul>
                 </div>
+                
+                
                 <div className={styles.footerColumn}>
                     <h3>Follow Us</h3>
                     <ul className={styles.socialLinks}>
-                        <li><a href="#"><i className="bi bi-facebook"></i></a></li>
                         <li><a href="#"><i className="bi bi-twitter"></i></a></li>
                         <li><a href="#"><i className="bi bi-linkedin"></i></a></li>
                         <li><a href="#"><i className="bi bi-instagram"></i></a></li>
