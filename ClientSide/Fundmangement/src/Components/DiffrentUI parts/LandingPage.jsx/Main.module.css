@@ -98,6 +98,14 @@
     padding: 2vh;
 }
 
+.card h2{
+    color: #0056b3;
+}
+.card p{
+    color: #4b8ac9;
+    font-size: 1.5vw;
+}
+
 
 .servicesSection {
     display: flex;
