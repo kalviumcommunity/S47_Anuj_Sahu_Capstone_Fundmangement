@@ -49,7 +49,7 @@ function Nav() {
             <nav>
                 <div className={styles.upperNav}>
                     <div>
-                        <h1 className={styles.companyName}>Morpheus Funds</h1>
+                        <Link to='/'><h1 className={styles.companyName}>Morpheus Funds</h1></Link>
                     </div>
                     {hasCookie ? (
                         <section>

@@ -86,8 +86,8 @@ return (
                             <p>Receive personalized stock recommendations.</p>
                             <img src={shareImg} alt="" />
                         </div>
-                        <div className={styles.cardBack}>
-                            <h2>Coming Soon</h2>
+                        <div className={`${styles.cardBack} ${styles.appointment}`}>
+                            <Link to = '/stocks'><button className={styles.bookappointment}>Get Stocks</button></Link>
                         </div>
                     </div>
                 </div>

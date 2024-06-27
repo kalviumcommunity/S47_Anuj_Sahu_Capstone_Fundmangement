@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose')
-const { UserDataSignUp, expertData } = require("./usermodel.js")
+const { UserDataSignUp, expertData,stockData } = require("./usermodel.js")
 const signupSchema = require('./Validators/SignupValidate.js')
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
@@ -31,8 +31,7 @@ exports.signup = async (req, res) => {
         }
 
         const hashPassword = crypto.createHash('sha256').update(value.password).digest('base64');
-        console.log(hashPassword,"passsword hashed" )
-        // Assuming UserDataSignUp.create() returns a promise that resolves to newUser
+        // console.log(hashPassword,"passsword hashed" )
         const newUser = await UserDataSignUp.create({
             userName: value.userName,
             email: value.email,
@@ -62,14 +61,12 @@ exports.googlelogin = (req, res) =>{
 
 exports.login = async (req, res) => {
     try {
-        const { userName, password } = req.body;
-        console.log(req.body,"I am req body")
-        console.log(userName, password);
+        const { email, password } = req.body;
 
         const hashPasswordLogin = crypto.createHash('sha256').update(password).digest('base64');
         console.log(hashPasswordLogin)
 
-        const user = await UserDataSignUp.findOne({ userName: userName, password: hashPasswordLogin });
+        const user = await UserDataSignUp.findOne({ email: email, password: hashPasswordLogin });
         console.log(user);
 
         if (!user) {
@@ -111,6 +108,42 @@ exports.auth = (req, res) => {
     res.send("you are authorize")
 }
 
+
+exports.stocksAdd = async(req,res) =>{
+    console.log(req)
+   
+    try {
+        const newStock = await stockData.create({
+            name : req.body.name,
+            ticker:req.body.ticker,
+            beta:req.body.beta,
+            debt_to_equity_ratio: req.body.debt_to_equity_ratio,
+            market_cap: req.body.market_cap,
+            current_price:req.body.current_price,
+            annual_return_percentage:req.body.annual_return_percentage,
+            dividend_yield:req.body.dividend_yield
+
+        })
+        console.log(newStock)
+        res.send("Stock added succusfully")
+
+        
+    } catch (error) {
+        console.log(error.message)
+        
+    }
+    
+}
+
+exports.stockData = async(req,res) =>{
+        try {
+            const stocks = await stockData.find();
+            res.json(stocks);
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    
+}
 exports.anuj = async (req, res) => {
     try {
         const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TCS&apikey=${ALPHA_VANTAGE_API_KEY}`;

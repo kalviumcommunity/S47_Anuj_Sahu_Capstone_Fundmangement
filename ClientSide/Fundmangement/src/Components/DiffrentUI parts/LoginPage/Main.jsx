@@ -9,7 +9,7 @@ import axios from 'axios';
 
 function Login() {
     const [formData, setFormData] = useState({
-        userName: '',
+        email: '',
         password: ''
     });
     const [loginError, setLoginError] = useState(false);
@@ -34,7 +34,7 @@ function Login() {
             const response = await axios.post('http://localhost:3000/login', formData);
             // Checking if the response contains a token
             if (response.data.token) {
-                setCookie('userName',formData.userName,30*60*60*1000,'/')
+                setCookie('userName',formData.email,30*60*60*1000,'/')
                 setCookie('JWToken', response.data.token, 5 * 60 * 60 * 1000,'/'); 
                 navigate(-1);
             }
@@ -57,7 +57,7 @@ function Login() {
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <h2>Login</h2>
                     <div className={styles.formGroup}>
-                        <input type="text" id="userName" name="userName" placeholder='userName' value={formData.userName} onChange={handleChange} />
+                        <input type="text" id="email" name="email" placeholder='email' value={formData.userName} onChange={handleChange} />
                     </div>
                     <div className={styles.formGroup}>
                         <input type="password" id="password" name="password" placeholder='Password' value={formData.password} onChange={handleChange} />
