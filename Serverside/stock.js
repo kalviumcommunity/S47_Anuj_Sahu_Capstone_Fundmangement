@@ -4,8 +4,8 @@ const stockData = {
     ticker: 'TCS',
     beta: 0.8,
     debt_to_equity_ratio: 0.09,
-    market_cap: 13.90, // in Lakh Crores
-    current_price: 3840, // in INR
+    market_cap: 13.90, 
+    current_price: 3840, 
     annual_return_percentage: 20.39,
     dividend_yield: 1.43
 };
