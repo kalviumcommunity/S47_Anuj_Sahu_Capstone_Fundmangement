@@ -7,6 +7,7 @@ const {Payments,paymentstatus } = require('./Payment.js')
 const cors = require('cors');
 require('dotenv').config();
 const Pfpcontroller = require('./ProfilePicController.js')
+const { generateContent } = require('./LLM.js');
 
 
 const app = express();
@@ -40,6 +41,17 @@ app.post('/profileUpload',Pfpcontroller.profileUpload)
 app.post('/stocks',stocksAdd)
 
 app.get('/stocks',stockData)
+
+app.post('/ai', async (req, res) => {
+    const { prompt } = req.body;
+    try {
+      const response = await generateContent(prompt);
+      res.json({ response });
+    } catch (error) {
+      console.error('Error generating content:', error);
+      res.status(500).json({ error: 'Internal server error' });
+      }
+    });
 
 // app.get('/getProfilePic',Pfpcontroller.getProfilePic)
 
