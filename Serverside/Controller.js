@@ -8,6 +8,7 @@ const sendOtp = require('./Validators/emailOtp.js');
 const JWToken  = require('./Validators/routeValidation.js')
 const axios = require('axios');
 const request = require('request');
+const { OAuth2Client } = require('google-auth-library');
 const jwt_decode = require('jwt-decode');
 const { log } = require('console');
 const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
@@ -52,12 +53,7 @@ exports.signup = async (req, res) => {
         return res.status(500).send("Internal Server Error");
     }
 };
-exports.googlelogin = (req, res) =>{
-    const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZjZTExYWVjZjllYjE0MDI0YTQ0YmJmZDFiY2Y4YjMyYTEyMjg3ZmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0OTY5Mzc2NDg2NTctbm1kZ25tcDMybG0zN3U1bnIxMXNsNmNyb3R0bHBuNmEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0OTY5Mzc2NDg2NTctbm1kZ25tcDMybG0zN3U1bnIxMXNsNmNyb3R0bHBuNmEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDIxMTYwNTg0NjQyNDkxMTU1MTYiLCJlbWFpbCI6ImFudWpzYWh1MTk1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYmYiOjE3MTM4NDcyMjgsIm5hbWUiOiJBbnVqIFNhaHUiLCJnaXZlbl9uYW1lIjoiQW51aiIsImZhbWlseV9uYW1lIjoiU2FodSIsImlhdCI6MTcxMzg0NzUyOCwiZXhwIjoxNzEzODUxMTI4LCJqdGkiOiIwZTQ0NDJkZGJjZmZhOTI4ZTllZjNkNzVkYTdjZjMyMDdjYTE4MTMzIn0.aCM7NqZwDJrhoAapX-hlv3NR2L6HeAwFr9LNXV_hk_B5-93FDf1lX-NcMFHFcMlq7OJN7sDStbcIeH40msWTIz3xQRN_NxXkfLeMYOqw9qiC9qSnIMWsi6RX7022cSAUN0o-Ik-jrhJkHyBCik50sVMOuZDgki2lX8lCTDGYyITm_OwJHI5B_iEt7pZqMeSeJbqGC2S6UDL0zRuSG-GA8pjt7c_LxgVL_nk9YC3RD2783cH7JzrenDc7E9gZY3-BPjdJwzeTAvO5HiyiJrzWXeDuh4MmGHOgzSZTICGFtGdX-OLje4NgyLyO2yQPmPvIsja3W2Sofj4TMVH04XrJjA"; // Assuming credential contains the JWT token
-    const decodedToken = jwt_decode.jwtDecode(token);
-    res.send(decodedToken)
 
-}
 
 exports.login = async (req, res) => {
     try {
@@ -81,6 +77,21 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.optSender = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const otp = await sendOtp(email); // Call your function to send OTP
+        res.status(200).json({ otp });
+    } catch (error) {
+        console.error('Error sending OTP:', error);
+        res.status(500).json({ error: 'Failed to send OTP' });
+    }
+};
+
+// app.listen(3000, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// });
 
 
 
@@ -103,10 +114,6 @@ exports.expert = async (req, res) => {
 exports.homeRoute = (req, res) => {
     res.send("I am the home route")
 }
-exports.auth = (req, res) => {
-    res.send("you are authorize")
-}
-
 
 exports.stocksAdd = async(req,res) =>{
     console.log(req)
@@ -134,15 +141,18 @@ exports.stocksAdd = async(req,res) =>{
     
 }
 
-exports.stockData = async(req,res) =>{
-        try {
-            const stocks = await stockData.find();
-            res.json(stocks);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    
-}
+exports.stockData = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    try {
+        const stocks = await stockData.find().skip(skip).limit(limit);
+        res.json(stocks);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 
 exports.portfolio = async(req,res) =>{
@@ -166,82 +176,7 @@ exports.portfolio = async(req,res) =>{
 }
 
 
-exports.userProtofolio = async(req,res)=>{
+// exports.userProtofolio = async(req,res)=>{
     
 
-}
-exports.anuj = async (req, res) => {
-    try {
-        const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TCS&apikey=${ALPHA_VANTAGE_API_KEY}`;
-        const requestOptions = {
-            url: url,
-            json: true,
-            headers: {
-                'User-Agent': 'request'
-            }
-        };
-
-        request.get(requestOptions, (err, response, data) => {
-            if (err) {
-                console.log('Error:', err);
-                res.status(500).send('Internal Server Error');
-            } else if (response.statusCode !== 200) {
-                console.log('Status:', response.statusCode);
-                res.status(response.statusCode).send('Failed to fetch data');
-            } else {
-                console.log(data);
-                res.status(200).json(data);
-            }
-        });
-    } catch (error) {
-        console.error('Error fetching stock data:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
-
-
-
-exports.fetchRiskData = async(symbol)=> {
-    const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
-    const url = `https://www.alphavantage.co/query?function=BETA&symbol=${symbol}&apikey=${apiKey}`;
-
-    try {
-        const response = await axios.get(url);
-        const data = response.data;
-        console.log(data);
-
-        if (data['Meta Data']) {
-            const beta = data['Meta Data']['Beta'];
-            console.log(beta);
-            return { success: true, beta };
-        } else if (data['Error Message']) {
-            return { success: false, error: data['Error Message'] };
-        } else {
-            return { success: false, error: 'An error occurred while fetching data.' };
-        }
-    } catch (error) {
-        return { success: false, error: error.message };
-    }
-}
-
-exports.fetchRiskDataController = async (req, res) => {
-    try {
-        const symbol = req.query.symbol;
-        if (!symbol) {
-            return res.status(400).send('Symbol parameter is missing');
-        }
-
-        const result = await fetchRiskData(symbol);
-
-        if (result.success) {
-            res.status(200).json({ beta: result.beta });
-        } else {
-            res.status(500).json({ error: result.error });
-        }
-    } catch (error) {
-        console.error('Error fetching risk data:', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
-
-// fetchRiskData('TCS');
+// }
