@@ -61,11 +61,9 @@ const UserInformationSchema = new mongoose.Schema({
         default: 0
     },
     portfolio: [{
-        stockDetails: {
-            type: StockSchema,
-            required: true
-        }
-    }]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Stocks"
+    }],
 });
 
 const UserDataSignUp = mongoose.model('users', UserInformationSchema);

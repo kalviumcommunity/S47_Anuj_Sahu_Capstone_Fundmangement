@@ -64,7 +64,6 @@ exports.login = async (req, res) => {
         const { email, password } = req.body;
 
         const hashPasswordLogin = crypto.createHash('sha256').update(password).digest('base64');
-        console.log(hashPasswordLogin)
 
         const user = await UserDataSignUp.findOne({ email: email, password: hashPasswordLogin });
         console.log(user);
@@ -143,6 +142,33 @@ exports.stockData = async(req,res) =>{
             res.status(500).json({ message: err.message });
         }
     
+}
+
+
+exports.portfolio = async(req,res) =>{
+    // console.log(req)
+    const { email, stockDetails } = req.body;
+
+    try {
+        const user = await UserDataSignUp.findOne({email:email });
+        if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+        }
+        const stock = await stockData.findOne({name:stockDetails.name});
+        console.log(stock, "I am new one stock")
+        user.portfolio.push(stock);
+        await user.save();
+        console.log("I am here 2")
+        res.status(200).json({ message: 'Stock added to portfolio', user });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+exports.userProtofolio = async(req,res)=>{
+    
+
 }
 exports.anuj = async (req, res) => {
     try {
