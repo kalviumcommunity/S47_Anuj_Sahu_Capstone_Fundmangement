@@ -1,7 +1,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const { startDatabase, homeRoute, anuj, signup, login,expert,auth,googlelogin ,stocksAdd ,stockData} = require('./Controller.js'); 
+const { startDatabase, homeRoute, anuj, signup, login,expert,auth,googlelogin ,stocksAdd ,stockData,portfolio} = require('./Controller.js'); 
 const JWToken  = require('./Validators/routeValidation.js')
 const {Payments,paymentstatus } = require('./Payment.js')
 const cors = require('cors');
@@ -41,6 +41,8 @@ app.post('/profileUpload',Pfpcontroller.profileUpload)
 app.post('/stocks',stocksAdd)
 
 app.get('/stocks',stockData)
+
+app.post('/users/add-to-portfolio',portfolio)
 
 app.post('/ai', async (req, res) => {
     const { prompt } = req.body;
