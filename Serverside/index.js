@@ -35,10 +35,6 @@ app.get('/appointment',expert )
 
 app.post('/profileUpload',Pfpcontroller.profileUpload)
 
-app.post('/stocks',stocksAdd)
-
-app.get('/stocks',stockData)
-
 app.post('/user/otp',optSender)
 
 app.post('/users/add-to-portfolio',portfolio)
@@ -54,19 +50,8 @@ app.post('/ai', async (req, res) => {
       }
     });
 
-// app.get('/getProfilePic',Pfpcontroller.getProfilePic)
-
-// async function run() {
-//     const symbol = 'TCS'; // Replace with the symbol you want to fetch data for
-//     const result = await fetchRiskData(symbol);
-//     console.log(result);
-// }
-// async function anujj(){
-//     console.log(await fetchRiskData('TCS'));
-
-// } 
-// anujj()
-
+app.post('/stocks',stocksAdd)
+app.get('/stocks',stockData)
 
 
 const startServer = () => {
