@@ -16,6 +16,7 @@ async function sendOtp(email) {
     // Generate OTP using otplib
     const otp = otplib.authenticator.generate(secret);
 
+
     const mailOptions = {
         from: 'morpheousfunds@gmail.com',
         to: email,
@@ -25,6 +26,7 @@ async function sendOtp(email) {
 
     // client.setex(email, 3000, otp)
     const otpsent = await transporter.sendMail(mailOptions);
+    return otp
 }
 
-module.exports = sendOtp;
+module.exports = {sendOtp};

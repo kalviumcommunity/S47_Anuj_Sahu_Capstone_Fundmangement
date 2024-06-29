@@ -2,7 +2,7 @@
 const express = require('express');
 
 const bodyParser = require('body-parser');
-const { startDatabase, homeRoute,signup, login,expert,auth,googlelogin  ,stocksAdd,stockData,optSender,portfolio} = require('./Controller.js'); 
+const { startDatabase, homeRoute,signup, login,expert,otpSendOnEmail,auth,googlelogin  ,stocksAdd,stockData,optSender,portfolio} = require('./Controller.js'); 
 const JWToken  = require('./Validators/routeValidation.js')
 const {Payments,paymentstatus } = require('./Payment.js')
 const cors = require('cors');
@@ -24,6 +24,8 @@ app.use(bodyParser.json());
 app.post('/signup', signup); // Route for the SignUp
 
 app.post('/login',login)  //Route for the Login
+
+app.post('/otpSend',otpSendOnEmail)
 
 app.post('/payments',Payments)
 

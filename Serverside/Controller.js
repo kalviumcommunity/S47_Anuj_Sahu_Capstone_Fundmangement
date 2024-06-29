@@ -4,14 +4,8 @@ const { UserDataSignUp, expertData,stockData } = require("./usermodel.js")
 const signupSchema = require('./Validators/SignupValidate.js')
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
-const sendOtp = require('./Validators/emailOtp.js');
+const {sendOtp} = require('./Validators/emailOtp.js');
 const JWToken  = require('./Validators/routeValidation.js')
-const axios = require('axios');
-const request = require('request');
-const { OAuth2Client } = require('google-auth-library');
-const jwt_decode = require('jwt-decode');
-const { log } = require('console');
-const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
 
 exports.startDatabase = async () => {
     try {
@@ -95,7 +89,18 @@ exports.optSender = async (req, res) => {
 
 
 
-
+exports.otpSendOnEmail = async (req, res) => {
+    const { email } = req.body;
+    console.log(email)
+    try {
+        const otp = await sendOtp(email);
+        console.log(otp);
+        res.status(200).json({ message: 'OTP sent successfully' ,otp});
+    } catch (error) {
+        console.error('Error sending OTP:', error);
+        res.status(500).json({ error: 'Failed to send OTP' });
+    }
+};
 
 exports.expert = async (req, res) => {
     try {

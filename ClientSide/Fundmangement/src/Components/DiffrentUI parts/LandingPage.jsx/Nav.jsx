@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './Nav.module.css';
 import { Link } from 'react-router-dom';
 import shareImg from '/src/assets/Banners/capstone image 3.jpeg';
+import EmailVerificationPopup from "./EmailVerificationPopup";
 
 function Nav() {
     const [isProfileCardOpen, setProfileCardOpen] = useState(false);
+    const [isEmailVerificationOpen, setEmailVerificationOpen] = useState(false);
     const profileCardRef = useRef(null);
     const [hasCookie, setHasCookie] = useState(false);
 
@@ -39,9 +41,20 @@ function Nav() {
 
     const handleLogout = () => {
         document.cookie = 'JWToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        
         window.location.reload();
         
     };
+
+    const handleVerifyEmail = () => {
+        setEmailVerificationOpen(true);
+    };
+
+    const closeEmailVerificationPopup = () => {
+        setEmailVerificationOpen(false);
+    };
+
     
 
     return (
@@ -74,10 +87,10 @@ function Nav() {
                         <div className={styles.lowerprofilecard}>
                             <h5 className={styles.username}>Anuj Sahu</h5>
                             <div className={styles.featuresContainer}>
-                                <p className={styles.features}>Your watch stokes</p>
                                 <p className={styles.features}>Your Protfolio</p>
                                 <p className={styles.features}>Your bookings</p>
                                 <p className={styles.features}>Contact Us</p>
+                                <p className={styles.features} onClick={handleVerifyEmail}>Verify Email</p>
                             </div>
                         <button onClick={()=>{handleLogout()} } className={styles.logout} >Logout</button>
                         </div>
@@ -91,6 +104,7 @@ function Nav() {
                     <a href="">Contact Us</a>
                 </div>
             </nav>
+            {isEmailVerificationOpen && <EmailVerificationPopup onClose={closeEmailVerificationPopup} />}
         </div>
     );
 }

@@ -1,0 +1,95 @@
+/* AiForm.module.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .chat-window {
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 400px; /* Adjust height as needed */
+    overflow-y: auto;
+  }
+  
+  .chat-bubble {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .ai-response {
+    background-color: #f0f0f0;
+    align-self: flex-start;
+  }
+  
+  .user-input {
+    background-color: #e2f7cb;
+    align-self: flex-end;
+  }
+  
+  .user-input form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-input input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .user-input button {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .user-input button:hover {
+    background-color: #45a049;
+  }
+  
+  .response-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .response-content {
+    white-space: pre-wrap; /* Maintain formatting */
+    font-family: 'Courier New', Courier, monospace; /* Use monospace font for code-like formatting */
+  }
+  
+  .copy-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .copy-button:hover {
+    background-color: #0056b3;
+  }
