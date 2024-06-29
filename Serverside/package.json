@@ -26,6 +26,7 @@
     "razorpay": "^2.9.2"
   },
   "scripts": {
+    "dev": "nodemon -L index.js",
     "start": "nodemon index.js"
   }
 }

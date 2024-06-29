@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 
-// app.get('/', homeRoute); // route for the home route.
+app.get('/', homeRoute); // route for the home route.
 
 
 app.post('/signup', signup); // Route for the SignUp
@@ -70,8 +70,8 @@ app.post('/ai', async (req, res) => {
 
 
 const startServer = () => {
-  app.listen(port, () => {
-  console.log(`Server is running on port ${port} 🚀🚀`);
+  app.listen(3000, () => {
+  console.log(`Server is running on port ${3000} 🚀🚀`);
 });
 };
 
