@@ -8,6 +8,7 @@ import SignUpPage from './Components/SignUpPage'
 import Expertappointment from './Components/Expertappointment'
 import Payment from './Components/Payment'
 import Stocks from './Components/Stocks'
+import LLM from './LLM'
 
 
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+      {/* <LLM/> */}
     
       <Routes>
         <Route exact path = "/" element = {<Home/>} />
