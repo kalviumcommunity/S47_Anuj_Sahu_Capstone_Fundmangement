@@ -120,6 +120,34 @@ exports.homeRoute = (req, res) => {
     res.send("I am the home route")
 }
 
+
+exports.portfolio = async(req,res) =>{
+    // console.log(req)
+    const { email, stockDetails } = req.body;
+
+    try {
+        const user = await UserDataSignUp.findOne({email:email });
+        if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+        }
+        const stock = await stockData.findOne({name:stockDetails.name});
+        console.log(stock, "I am new one stock")
+        user.portfolio.push(stock);
+        await user.save();
+        console.log("I am here 2")
+        res.status(200).json({ message: 'Stock added to portfolio', user });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+// exports.userProtofolio = async(req,res)=>{
+    
+
+// }
+
+
 exports.stocksAdd = async(req,res) =>{
     console.log(req)
    
@@ -159,29 +187,3 @@ exports.stockData = async (req, res) => {
     }
 };
 
-
-exports.portfolio = async(req,res) =>{
-    // console.log(req)
-    const { email, stockDetails } = req.body;
-
-    try {
-        const user = await UserDataSignUp.findOne({email:email });
-        if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-        }
-        const stock = await stockData.findOne({name:stockDetails.name});
-        console.log(stock, "I am new one stock")
-        user.portfolio.push(stock);
-        await user.save();
-        console.log("I am here 2")
-        res.status(200).json({ message: 'Stock added to portfolio', user });
-    } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
-    }
-}
-
-
-// exports.userProtofolio = async(req,res)=>{
-    
-
-// }
